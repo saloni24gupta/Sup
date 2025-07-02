@@ -1,0 +1,44 @@
+<VirtualHost *:80>
+  ServerName test.com
+  DocumentRoot /home/sp/Supplyu/public
+
+  <IfModule mpm_itk_module>
+    AssignUserID sp sp
+  </IfModule>
+
+  <Directory /home/sp/Supplyu/public>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+  </Directory>
+
+  # Replace FilesMatch
+  ProxyPassMatch "^/(.*\.php(/.*)?)$" \
+    "fcgi://127.0.0.1:9000/home/sp/Supplyu/public/$1"
+</VirtualHost>
+
+
+sudo chown -R sp:sp /home/sp/Supplyu/storage
+sudo chown -R sp:sp /home/sp/Supplyu/bootstrap/cache
+
+sudo chmod -R 775 /home/sp/Supplyu/storage
+sudo chmod -R 775 /home/sp/Supplyu/bootstrap/cache
+
+
+/win+r /etc/hosts
+#127.0.0.1      saloni.cladev.com
+::1             localhost
+127.0.0.1 localhost
+20.204.161.242 gitlab.clavax.us
+
+#127.0.0.1 yash.cladev.com
+13.201.83.170 test.com
+127.0.0.1 test.com
+ 
+
+
+server  vim /etc/hosts
+13.201.83.170  test.com
+127.0.0.1 localhost
+
+
